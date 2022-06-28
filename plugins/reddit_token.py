@@ -12,4 +12,5 @@ def create_token():
                         auth=auth, data=data, headers=headers)
     token = res.json()['access_token']
     Variable.set("reddit_token", token)
+    print(token)
     return token
