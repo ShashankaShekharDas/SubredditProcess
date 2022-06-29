@@ -14,3 +14,6 @@ def create_token():
     Variable.set("reddit_token", token)
     print(token)
     return token
+
+if __name__ == "__main__":
+    create_token()
