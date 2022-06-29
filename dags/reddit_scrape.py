@@ -17,14 +17,21 @@ dag = DAG(
     tags=['reddit', 'scrape']
 )
 
-task1 = BashOperator(
+create_token = BashOperator(
     task_id='reddit_create_token',
     dag=dag,
     bash_command="echo `python '/home/airflow_exec/airflow-medium/plugins/reddit_token.py'`",
     do_xcom_push=True
 )
 
-task1
+get_subreddit_list = BashOperator(
+    task_id="get_subreddits_list",
+    dag=dag,
+    bash_command="echo `python '/home/airflow_exec/airflow-medium/plugins/read_from_db.py'`",
+    do_xcom_push=True
+)
+
+create_token >> get_subreddit_list
 
 if __name__ == "__main__":
     dag.cli()

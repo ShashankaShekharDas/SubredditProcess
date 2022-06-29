@@ -11,9 +11,8 @@ def create_token():
     res = requests.post('https://www.reddit.com/api/v1/access_token',
                         auth=auth, data=data, headers=headers)
     token = res.json()['access_token']
-    Variable.set("reddit_token", token)
-    print(token)
     return token
+
 
 if __name__ == "__main__":
     create_token()
