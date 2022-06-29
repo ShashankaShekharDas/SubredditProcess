@@ -20,8 +20,8 @@ dag = DAG(
 create_token = BashOperator(
     task_id='reddit_create_token',
     dag=dag,
-    bash_command="cd /home/airflow_exec/airflow-medium/plugins;echo `python -c 'import "
-                 "reddit_token;reddit_token.create_token()'`",
+    bash_command="cd /home/airflow_exec/airflow-medium/plugins;python -c 'import "
+                 "reddit_token;print(reddit_token.create_token())'",
     do_xcom_push=True
 )
 
