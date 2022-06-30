@@ -26,4 +26,4 @@ class SQLConnection:
 
 
 if __name__ == "__main__":
-    SQLConnection().get_subreddits()
+    print(SQLConnection().get_subreddits())
