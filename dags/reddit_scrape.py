@@ -29,7 +29,7 @@ get_subreddit_list = BashOperator(
     task_id="get_subreddits_list",
     dag=dag,
     bash_command="cd /home/airflow_exec/airflow-medium/plugins;python -c 'import "
-                 "read_from_db;read_from_db.SQLConnection().get_subreddits()'",
+                 "read_from_db;read_from_db.main()'",
     do_xcom_push=True
 )
 

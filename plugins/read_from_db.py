@@ -25,5 +25,9 @@ class SQLConnection:
         return json.dumps(serialized_list)
 
 
+def main():
+    print(SQLConnection().get_subreddits())
+
+
 if __name__ == "__main__":
     print(SQLConnection().get_subreddits())
