@@ -7,9 +7,9 @@ class SQLConnection:
     def __init__(self):
         self.res = None
         self.cursor = None
-        self.config = {'user': Variable.get("gcp_sql_user"),
-                       'password': Variable.get("gcp_sql_password"),
-                       'host': Variable.get("gcp_sql_host"),
+        self.config = {'user': "root",
+                       'password': "Mala_das1965",
+                       'host': "34.123.180.99",
                        'client_flags': [ClientFlag.SSL],
                        'database': 'reddit'}
         self.connection_sql = mysql.connector.connect(**self.config)
@@ -30,4 +30,4 @@ def main():
 
 
 if __name__ == "__main__":
-    print(SQLConnection().get_subreddits())
+    print(main())
