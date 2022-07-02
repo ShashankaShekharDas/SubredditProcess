@@ -29,7 +29,7 @@ class Read_subreddit:
         for rows in self.reader:
             subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
             print(subreddit_url)
-            res = requests.get("subreddit_url", headers=self.headers, params=self.params).json()
+            res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
             full_name = ""
             self.posts_title[rows["subreddit_name"]] = []
             for post in res["data"]["children"]:
