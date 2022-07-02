@@ -12,7 +12,8 @@ class Read_subreddit:
     def read_csv(self):
         with open('/home/airflow_exec/airflow-medium/data/subreddit.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
-            print(reader)
+            for row in reader:
+                print(row)
 
 
 def main():
