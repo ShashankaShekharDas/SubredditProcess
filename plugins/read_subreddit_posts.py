@@ -12,7 +12,7 @@ class Read_subreddit:
         self.headers = {'User-Agent': 'MyBot/0.0.1'}
         self.headers = {**self.headers, **{'Authorization': f"bearer {self.reddit_token}"}}
         # Parameters for getting posts
-        self.params = {"limit": -1}
+        self.params = {"limit": 10000}
         self.url = "https://oauth.reddit.com/r/{subreddit_name}/new"
         self.posts_contents = {}
 
