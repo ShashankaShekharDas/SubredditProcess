@@ -34,15 +34,8 @@ class Read_subreddit:
                         self.posts_contents[rows["subreddit_name"]]["title"] = post["data"]["title"]
                         self.posts_contents[rows["subreddit_name"]]["author_fullname"] = post["data"]["author_fullname"]
                         self.posts_contents[rows["subreddit_name"]]["selftext"] = post["data"]["selftext"]
-                        print("#POST")
-                        for i in post["data"]:
-                            print(i)
-                        print("#KIND")
-                        for i in post["kind"]:
-                            print(i)
-                        break
-            return None
-            # return self.posts_title
+
+            return self.posts_contents
 
 
 def main():
