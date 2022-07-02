@@ -26,16 +26,16 @@ class Read_subreddit:
         requests.get("https://oauth.reddit.com/api/v1/me", headers=self.headers)
 
     def get_posts_subreddit(self):
-        for rows in self.reader:
+        print(type(self.reader))
+        # for rows in self.reader:
             # subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
-            print(rows)
+            # print(rows)
             # res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
             # full_name = ""
             # self.posts_title[rows["subreddit_name"]] = []
             # for post in res["data"]["children"]:
             #     fullname = post["kind"] + "_" + post["data"]["id"]
             #     self.posts_title[rows["subreddit_name"]].append(post["data"]["title"])
-
 
 
 def main():
