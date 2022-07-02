@@ -40,7 +40,7 @@ get_subreddit_posts = BashOperator(
     do_xcom_push=False
 )
 
-create_token >> get_subreddit_list
+create_token >> get_subreddit_list >> get_subreddit_posts
 
 if __name__ == "__main__":
     dag.cli()
