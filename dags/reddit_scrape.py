@@ -32,6 +32,13 @@ get_subreddit_list = BashOperator(
     do_xcom_push=False
 )
 
+get_subreddit_posts = BashOperator(
+    task_id="get_subreddits_posts",
+    dag=dag,
+    bash_command='echo "{{ ti.xcom_pull(key="return_value") }}"',
+    do_xcom_push=False
+)
+
 create_token >> get_subreddit_list
 
 if __name__ == "__main__":
