@@ -28,7 +28,7 @@ create_token = BashOperator(
 get_subreddit_list = BashOperator(
     task_id="get_subreddits_list",
     dag=dag,
-    bash_command="sh /home/airflow_exec/airflow-medium/plugins/read_from_db.sh",
+    bash_command="/home/airflow_exec/airflow-medium/plugins/read_from_db.sh ",
     do_xcom_push=False
 )
 
