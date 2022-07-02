@@ -26,7 +26,7 @@ class Read_subreddit:
                 subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
                 if rows["start_post"] == "none":
                     # If none, get all historical posts
-                    res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
+                    res = requests.get(subreddit_url, headers=self.headers).json()
                     full_name = ""
                     self.posts_contents[rows["subreddit_name"]] = {}
                     for post in res["data"]["children"]:
