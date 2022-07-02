@@ -12,7 +12,7 @@ class Read_subreddit:
         self.headers = {'User-Agent': 'MyBot/0.0.1'}
         self.headers = {**self.headers, **{'Authorization': f"bearer {self.reddit_token}"}}
         # Parameters for getting posts
-        self.params = {"limit": 20}
+        self.params = {"limit": -1}
         self.url = "https://oauth.reddit.com/r/{subreddit_name}/new"
         self.posts_contents = {}
 
@@ -26,7 +26,7 @@ class Read_subreddit:
                 subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
                 if rows["start_post"] == "none":
                     # If none, get all historical posts
-                    res = requests.get(subreddit_url, headers=self.headers).json()
+                    res = requests.get(subreddit_url, headers=self.headers,params=self.params).json()
                     full_name = ""
                     self.posts_contents[rows["subreddit_name"]] = {}
                     print(len(res["data"]["children"]))
