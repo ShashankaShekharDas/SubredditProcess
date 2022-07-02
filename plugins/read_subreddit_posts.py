@@ -23,22 +23,21 @@ class Read_subreddit:
         with open(self.subreddit_csv_location, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for rows in reader:
-                print(rows)
                 subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
-                print(subreddit_url)
                 res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
                 full_name = ""
                 self.posts_title[rows["subreddit_name"]] = []
                 for post in res["data"]["children"]:
                     fullname = post["kind"] + "_" + post["data"]["id"]
                     self.posts_title[rows["subreddit_name"]].append(post["data"]["title"])
+            return self.posts_title
 
 
 def main():
     # Argument 1 is the token
     read_subreddit = Read_subreddit(sys.argv[1])
     read_subreddit.set_requests_config()
-    read_subreddit.get_posts_subreddit()
+    print(read_subreddit.get_posts_subreddit())
 
 
 if __name__ == "__main__":
