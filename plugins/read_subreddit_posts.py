@@ -29,6 +29,7 @@ class Read_subreddit:
                     res = requests.get(subreddit_url, headers=self.headers).json()
                     full_name = ""
                     self.posts_contents[rows["subreddit_name"]] = {}
+                    print(len(res["data"]["children"]))
                     for post in res["data"]["children"]:
                         fullname = post["kind"] + "_" + post["data"]["id"]
                         self.posts_contents[rows["subreddit_name"]]["title"] = post["data"]["title"]
