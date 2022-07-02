@@ -27,8 +27,8 @@ class Read_subreddit:
 
     def get_posts_subreddit(self):
         for rows in self.reader:
-            subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
-            print(subreddit_url)
+            # subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
+            print(rows)
             # res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
             # full_name = ""
             # self.posts_title[rows["subreddit_name"]] = []
