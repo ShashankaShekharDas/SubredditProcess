@@ -11,33 +11,27 @@ class Read_subreddit:
         # Creating the header
         self.headers = {'User-Agent': 'MyBot/0.0.1'}
         self.headers = {**self.headers, **{'Authorization': f"bearer {self.reddit_token}"}}
-        # Variable for posts
-        self.reader = self.read_csv()
         # Parameters for getting posts
         self.params = {"limit": 20}
         self.url = "https://oauth.reddit.com/r/{subreddit_name}/new"
         self.posts_title = {}
 
-    def read_csv(self):
-        with open(self.subreddit_csv_location, newline='') as csvfile:
-            return csv.DictReader(csvfile)
-            # for rows in self.reader:
-            #     print(rows["subreddit_name"])
-
     def set_requests_config(self):
         requests.get("https://oauth.reddit.com/api/v1/me", headers=self.headers)
 
     def get_posts_subreddit(self):
-        for rows in self.reader:
-            print(rows)
-            # subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
-            # print(rows)
-            # res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
-            # full_name = ""
-            # self.posts_title[rows["subreddit_name"]] = []
-            # for post in res["data"]["children"]:
-            #     fullname = post["kind"] + "_" + post["data"]["id"]
-            #     self.posts_title[rows["subreddit_name"]].append(post["data"]["title"])
+        with open(self.subreddit_csv_location, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for rows in reader:
+                print(rows)
+                subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
+                print(subreddit_url)
+                res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
+                full_name = ""
+                self.posts_title[rows["subreddit_name"]] = []
+                for post in res["data"]["children"]:
+                    fullname = post["kind"] + "_" + post["data"]["id"]
+                    self.posts_title[rows["subreddit_name"]].append(post["data"]["title"])
 
 
 def main():
