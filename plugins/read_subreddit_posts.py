@@ -24,13 +24,18 @@ class Read_subreddit:
             reader = csv.DictReader(csvfile)
             for rows in reader:
                 subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
-                res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
-                full_name = ""
-                self.posts_title[rows["subreddit_name"]] = []
-                for post in res["data"]["children"]:
-                    fullname = post["kind"] + "_" + post["data"]["id"]
-                    self.posts_title[rows["subreddit_name"]].append(post["data"]["title"])
-            return self.posts_title
+                if rows["start_post"] == "none":
+                    #If none, get all historical posts
+                    res = requests.get(subreddit_url, headers=self.headers,params=self.params).json()
+                    full_name = ""
+                    self.posts_title[rows["subreddit_name"]] = []
+                    for post in res["data"]["children"]:
+                        fullname = post["kind"] + "_" + post["data"]["id"]
+                        self.posts_title[rows["subreddit_name"]].append(post["data"]["title"])
+                        print(post["data"])
+                        break
+            return None
+            # return self.posts_title
 
 
 def main():
