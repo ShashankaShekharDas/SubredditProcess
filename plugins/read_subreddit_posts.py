@@ -34,8 +34,7 @@ class Read_subreddit:
                         self.posts_contents[rows["subreddit_name"]]["title"] = post["data"]["title"]
                         self.posts_contents[rows["subreddit_name"]]["author_fullname"] = post["data"]["author_fullname"]
                         self.posts_contents[rows["subreddit_name"]]["selftext"] = post["data"]["selftext"]
-
-            return self.posts_contents
+            return len(self.posts_contents["cscareerquestionsEU"]["title"])
 
 
 def main():
