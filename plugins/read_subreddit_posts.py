@@ -14,7 +14,7 @@ class Read_subreddit:
         # Parameters for getting posts
         self.params = {"limit": 20}
         self.url = "https://oauth.reddit.com/r/{subreddit_name}/new"
-        self.posts_title = {}
+        self.posts_contents = {}
 
     def set_requests_config(self):
         requests.get("https://oauth.reddit.com/api/v1/me", headers=self.headers)
@@ -25,14 +25,17 @@ class Read_subreddit:
             for rows in reader:
                 subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
                 if rows["start_post"] == "none":
-                    #If none, get all historical posts
-                    res = requests.get(subreddit_url, headers=self.headers,params=self.params).json()
+                    # If none, get all historical posts
+                    res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
                     full_name = ""
-                    self.posts_title[rows["subreddit_name"]] = []
+                    self.posts_contents[rows["subreddit_name"]] = {}
                     for post in res["data"]["children"]:
                         fullname = post["kind"] + "_" + post["data"]["id"]
-                        self.posts_title[rows["subreddit_name"]].append(post["data"]["title"])
-                        print(post["data"])
+                        self.posts_contents[rows["subreddit_name"]]["title"] = post["data"]["title"]
+                        self.posts_contents[rows["subreddit_name"]]["author_fullname"] = post["data"]["author_fullname"]
+                        self.posts_contents[rows["subreddit_name"]]["selftext"] = post["data"]["selftext"]
+                        for i in post:
+                            print(i)
                         break
             return None
             # return self.posts_title
