@@ -21,13 +21,16 @@ class Read_subreddit:
     def read_csv(self):
         with open(self.subreddit_csv_location, newline='') as csvfile:
             self.reader = csv.DictReader(csvfile)
+            for rows in self.reader:
+                print(rows["subreddit_name"])
 
     def set_requests_config(self):
         requests.get("https://oauth.reddit.com/api/v1/me", headers=self.headers)
 
     def get_posts_subreddit(self):
-        for rows in self.reader:
-            print(1)
+        print(1)
+        # for rows in self.reader:
+        #     print(rows)
             # subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
             # print(rows)
             # res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
