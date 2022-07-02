@@ -35,7 +35,7 @@ class Read_subreddit:
             # for post in res["data"]["children"]:
             #     fullname = post["kind"] + "_" + post["data"]["id"]
             #     self.posts_title[rows["subreddit_name"]].append(post["data"]["title"])
-        return self.posts_title
+
 
 
 def main():
@@ -43,7 +43,7 @@ def main():
     read_subreddit = Read_subreddit(sys.argv[1])
     read_subreddit.read_csv()
     read_subreddit.set_requests_config()
-    print(read_subreddit.get_posts_subreddit())
+    read_subreddit.get_posts_subreddit()
 
 
 if __name__ == "__main__":
