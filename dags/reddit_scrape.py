@@ -35,7 +35,8 @@ get_subreddit_list = BashOperator(
 get_subreddit_posts = BashOperator(
     task_id="get_subreddits_posts",
     dag=dag,
-    bash_command='echo "{{ ti.xcom_pull(key="return_value") }}"',
+    bash_command="cd /home/airflow_exec/airflow-medium/plugins;python read_subreddit_posts.py {{ ti.xcom_pull("
+                 "key='return_value') }}",
     do_xcom_push=False
 )
 
