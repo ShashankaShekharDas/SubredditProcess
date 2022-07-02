@@ -12,7 +12,7 @@ class Read_subreddit:
         self.headers = {'User-Agent': 'MyBot/0.0.1'}
         self.headers = {**self.headers, **{'Authorization': f"bearer {self.reddit_token}"}}
         # Variable for posts
-        self.reader = None
+        self.reader = self.read_csv()
         # Parameters for getting posts
         self.params = {"limit": 20}
         self.url = "https://oauth.reddit.com/r/{subreddit_name}/new"
@@ -20,17 +20,16 @@ class Read_subreddit:
 
     def read_csv(self):
         with open(self.subreddit_csv_location, newline='') as csvfile:
-            self.reader = csv.DictReader(csvfile)
-            for rows in self.reader:
-                print(rows["subreddit_name"])
+            return csv.DictReader(csvfile)
+            # for rows in self.reader:
+            #     print(rows["subreddit_name"])
 
     def set_requests_config(self):
         requests.get("https://oauth.reddit.com/api/v1/me", headers=self.headers)
 
     def get_posts_subreddit(self):
-        print(1)
-        # for rows in self.reader:
-        #     print(rows)
+        for rows in self.reader:
+            print(rows)
             # subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
             # print(rows)
             # res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
@@ -44,7 +43,6 @@ class Read_subreddit:
 def main():
     # Argument 1 is the token
     read_subreddit = Read_subreddit(sys.argv[1])
-    read_subreddit.read_csv()
     read_subreddit.set_requests_config()
     read_subreddit.get_posts_subreddit()
 
