@@ -25,12 +25,12 @@ create_token = BashOperator(
     do_xcom_push=True
 )
 
-get_subreddit_list = BashOperator(
-    task_id="get_subreddits_list",
-    dag=dag,
-    bash_command="bash /home/airflow_exec/airflow-medium/plugins/read_from_db.sh ",
-    do_xcom_push=False
-)
+# get_subreddit_list = BashOperator(
+#     task_id="get_subreddits_list",
+#     dag=dag,
+#     bash_command="bash /home/airflow_exec/airflow-medium/plugins/read_from_db.sh ",
+#     do_xcom_push=False
+# )
 
 get_subreddit_posts = BashOperator(
     task_id="get_subreddits_posts",
@@ -40,7 +40,8 @@ get_subreddit_posts = BashOperator(
     do_xcom_push=False
 )
 
-create_token >> get_subreddit_list >> get_subreddit_posts
+# create_token >> get_subreddit_list >> get_subreddit_posts
+create_token >> get_subreddit_posts
 
 if __name__ == "__main__":
     dag.cli()
