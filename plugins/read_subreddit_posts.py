@@ -1,6 +1,6 @@
 import sys
 import csv
-from datetime import datetime
+import datetime
 
 import requests
 
