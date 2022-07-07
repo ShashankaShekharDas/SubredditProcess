@@ -1,5 +1,6 @@
 import sys
 import csv
+from datetime import datetime
 
 import requests
 
@@ -20,6 +21,7 @@ class Read_subreddit:
         requests.get("https://oauth.reddit.com/api/v1/me", headers=self.headers)
 
     def get_posts_subreddit(self):
+        time_start = datetime.datetime.now()
         with open(self.subreddit_csv_location, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for rows in reader:
@@ -32,13 +34,14 @@ class Read_subreddit:
                     self.posts_contents[rows["subreddit_name"]] = {}
                     if not "data" in res:
                         continue
+                    print(subreddit_url)
                     for post in res["data"]["children"]:
-                        print(subreddit_url)
                         fullname = post["kind"] + "_" + post["data"]["id"]
                         self.posts_contents[rows["subreddit_name"]]["title"] = post["data"]["title"]
                         # self.posts_contents[rows["subreddit_name"]]["author_fullname"] = post["data"]["author_fullname"]
                         self.posts_contents[rows["subreddit_name"]]["selftext"] = post["data"]["selftext"]
             # return len(self.posts_contents["AskReddit"]["title"])
+            print("Time Taken = ", datetime.datetime.now() - time_start)
             return len(self.posts_contents.keys())
 
 
