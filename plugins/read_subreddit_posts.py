@@ -26,7 +26,7 @@ class Read_subreddit:
                 subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
                 if rows["start_post"] == "none":
                     # If none, get all historical posts
-                    res = requests.get(subreddit_url, headers=self.headers,params=self.params).json()
+                    res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
                     full_name = ""
                     self.posts_contents[rows["subreddit_name"]] = {}
                     print(len(res["data"]["children"]))
@@ -35,7 +35,8 @@ class Read_subreddit:
                         self.posts_contents[rows["subreddit_name"]]["title"] = post["data"]["title"]
                         self.posts_contents[rows["subreddit_name"]]["author_fullname"] = post["data"]["author_fullname"]
                         self.posts_contents[rows["subreddit_name"]]["selftext"] = post["data"]["selftext"]
-            return len(self.posts_contents["AskReddit"]["title"])
+            # return len(self.posts_contents["AskReddit"]["title"])
+            return self.posts_contents.keys()
 
 
 def main():
