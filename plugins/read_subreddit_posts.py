@@ -31,9 +31,9 @@ class Read_subreddit:
                     full_name = ""
                     self.posts_contents[rows["subreddit_name"]] = {}
                     if not "data" in res:
-                        print(subreddit_url)
                         continue
                     for post in res["data"]["children"]:
+                        print(subreddit_url)
                         fullname = post["kind"] + "_" + post["data"]["id"]
                         self.posts_contents[rows["subreddit_name"]]["title"] = post["data"]["title"]
                         # self.posts_contents[rows["subreddit_name"]]["author_fullname"] = post["data"]["author_fullname"]
