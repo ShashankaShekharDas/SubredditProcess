@@ -24,6 +24,7 @@ class Read_subreddit:
             reader = csv.DictReader(csvfile)
             for rows in reader:
                 subreddit_url = self.url.format(subreddit_name=rows["subreddit_name"])
+                print(subreddit_url)
                 if rows["start_post"] == "none":
                     # If none, get all historical posts
                     res = requests.get(subreddit_url, headers=self.headers, params=self.params).json()
